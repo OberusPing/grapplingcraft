@@ -1,10 +1,9 @@
-<!DOCTYPE html>
+¬<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Grappling Craft</title>
-<meta name="description" content="The Grappling Craft is a digital garden of notes, essays, and field guides on jiu jitsu coaching, ecological dynamics, and skill acquisition.">
+<title>Ecological Dynamics for Jiu Jitsu Coaches</title>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -14,7 +13,6 @@
     --ink-light: #5c5c5a;
     --ink-faint: #8a8985;
     --accent-green: #4a7c59;
-    --accent-green-deep: #335c43;
     --accent-green-light: #e8f0ea;
     --accent-green-faint: #d1e2d5;
     --accent-orange: #c2703e;
@@ -22,884 +20,598 @@
     --border: #e2ddd4;
     --border-light: #eae6df;
     --card: #fffdf9;
-    --shadow-soft: 0 18px 40px rgba(53, 53, 52, 0.05);
   }
 
-  * { box-sizing: border-box; }
-
-  html {
-    scroll-behavior: smooth;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    margin: 0;
     font-family: 'Source Sans 3', -apple-system, sans-serif;
-    background:
-      radial-gradient(circle at top left, rgba(232, 240, 234, 0.95), transparent 30%),
-      radial-gradient(circle at top right, rgba(245, 235, 227, 0.9), transparent 28%),
-      linear-gradient(180deg, #fbf9f4 0%, #f7f2ea 100%);
+    background: var(--cream);
     color: var(--ink);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     font-size: 17px;
   }
 
-  a {
-    color: inherit;
-  }
-
-  img {
-    max-width: 100%;
-    display: block;
-  }
-
-  .page-shell {
-    max-width: 1180px;
+  /* ── Layout: sidebar + main ── */
+  .layout {
+    max-width: 1060px;
     margin: 0 auto;
-    padding: 28px 28px 80px;
-  }
-
-  .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    padding: 10px 0 24px;
-  }
-
-  .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-  }
-
-  .brand-mark {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid var(--accent-green-faint);
-    background: var(--accent-green-light);
     display: grid;
-    place-items: center;
-    color: var(--accent-green);
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    padding: 72px 32px 80px;
+    align-items: start;
   }
 
-  .brand-copy {
+  /* ── Sidebar TOC ── */
+  .toc {
+    position: sticky;
+    top: 48px;
+    padding-top: 8px;
+  }
+
+  .toc-title {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .toc a {
+    display: block;
+    font-size: 14px;
+    color: var(--ink-faint);
+    text-decoration: none;
+    padding: 5px 0 5px 12px;
+    border-left: 2px solid var(--border-light);
+    transition: all 0.2s ease;
+    line-height: 1.45;
+  }
+
+  .toc a:hover {
+    color: var(--accent-green);
+    border-left-color: var(--accent-green);
+  }
+
+  .toc a.active {
+    color: var(--accent-green);
+    border-left-color: var(--accent-green);
+    font-weight: 500;
+  }
+
+  /* ── Main content ── */
+  .main {
+    max-width: 720px;
     min-width: 0;
   }
 
-  .brand-copy strong {
-    display: block;
+  /* ── Typography ── */
+  h1, h2, h3 {
     font-family: 'Libre Baskerville', Georgia, serif;
     font-weight: 400;
-    font-size: 1rem;
-    letter-spacing: -0.01em;
+    color: var(--ink);
   }
 
-  .brand-copy span,
-  .topbar-links a {
+  h1 { font-size: 2.4em; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.01em; }
+  h2 { font-size: 1.45em; line-height: 1.35; margin-bottom: 12px; }
+  h3 { font-size: 1.1em; line-height: 1.4; margin-bottom: 6px; }
+
+  p { margin-bottom: 14px; color: var(--ink); }
+  p:last-child { margin-bottom: 0; }
+  em { color: var(--ink-light); }
+  strong { font-weight: 600; color: var(--ink); }
+
+  /* ── Header ── */
+  header {
+    margin-bottom: 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  header .breadcrumb {
     font-family: 'Source Code Pro', monospace;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--ink-faint);
-  }
-
-  .topbar-links {
-    display: flex;
-    gap: 18px;
-    flex-wrap: wrap;
-  }
-
-  .topbar-links a {
-    text-decoration: none;
-    padding-bottom: 2px;
-    border-bottom: 1px solid transparent;
-    transition: color 0.2s ease, border-color 0.2s ease;
-  }
-
-  .topbar-links a:hover,
-  .topbar-links a:focus-visible {
+    font-size: 13px;
     color: var(--accent-green);
-    border-color: var(--accent-green-faint);
-    outline: none;
-  }
-
-  .hero {
-    display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.9fr);
-    gap: 30px;
-    align-items: stretch;
-    margin-bottom: 34px;
-  }
-
-  .hero-copy,
-  .hero-panel {
-    background: rgba(255, 253, 249, 0.72);
-    border: 1px solid rgba(226, 221, 212, 0.9);
-    border-radius: 28px;
-    box-shadow: var(--shadow-soft);
-    backdrop-filter: blur(6px);
-  }
-
-  .hero-copy {
-    padding: 52px 48px 44px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-copy::after {
-    content: "";
-    position: absolute;
-    inset: auto -100px -120px auto;
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(232, 240, 234, 0.95) 0%, rgba(232, 240, 234, 0) 72%);
-    pointer-events: none;
-  }
-
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    letter-spacing: 0.02em;
     margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  header .subtitle {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 1.1em;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1.6;
+    max-width: 580px;
+  }
+
+  /* ── Section icon row ── */
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 6px;
+  }
+
+  .section-icon {
+    flex-shrink: 0;
+  }
+
+  .section-icon svg {
+    display: block;
+  }
+
+  /* ── Sections ── */
+  .section { margin-bottom: 64px; }
+
+  .section-label {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 1.7em;
+    font-weight: 500;
+    color: var(--accent-green);
+    line-height: 1.3;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .section-subtitle {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.05em;
+    font-weight: 400;
+    color: var(--ink-faint);
+    line-height: 1.55;
+    margin-bottom: 28px;
+  }
+
+  /* ── Premise cards ── */
+  .premise {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px 32px 28px;
+    margin-bottom: 20px;
+  }
+
+  .premise .number {
     font-family: 'Source Code Pro', monospace;
     font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--accent-green);
+    color: var(--accent-orange);
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    font-weight: 500;
   }
 
-  .eyebrow::before {
-    content: "";
-    width: 28px;
-    height: 1px;
-    background: var(--accent-green-faint);
+  .premise h3 { font-size: 1.2em; margin-bottom: 12px; }
+  .premise p { font-size: 16px; color: var(--ink-light); line-height: 1.75; }
+
+  .premise .example {
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: var(--warm-white);
+    border-radius: 6px;
+    font-size: 15px;
+    color: var(--ink-faint);
+    font-style: italic;
+    line-height: 1.7;
   }
 
-  h1,
-  h2,
-  h3 {
+  .premise .example strong { font-style: normal; color: var(--ink-light); }
+
+  .bridge {
+    text-align: center;
+    padding: 28px 24px;
+    margin-bottom: 64px;
+  }
+
+  .bridge p {
     font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 1.05em;
+    color: var(--ink-faint);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .bridge .arrow {
+    display: block;
+    color: var(--border);
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  /* ── CRAFT ── */
+  .craft-item {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border-light);
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .craft-item:first-of-type { padding-top: 0; }
+  .craft-item:last-of-type { border-bottom: none; }
+
+  .craft-letter {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 2em;
+    color: var(--accent-green);
+    line-height: 1;
+    padding-top: 2px;
+  }
+
+  .craft-body h3 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .craft-body p { font-size: 16px; color: var(--ink-light); line-height: 1.75; }
+
+  .craft-tip {
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--ink-faint);
+    padding-left: 16px;
+    border-left: 2px solid var(--accent-green-faint);
+    line-height: 1.7;
+  }
+
+  /* ── FAQ ── */
+  .faq-item {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .faq-item:first-of-type { padding-top: 0; }
+  .faq-item:last-of-type { border-bottom: none; }
+
+  .faq-q {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 1em;
     font-weight: 400;
     color: var(--ink);
-    margin: 0;
+    margin-bottom: 10px;
+    line-height: 1.55;
   }
 
-  h1 {
-    font-size: clamp(2.8rem, 5vw, 4.4rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    max-width: 10ch;
-    margin-bottom: 22px;
-  }
-
-  .hero-copy p {
-    max-width: 40rem;
-    font-size: 1.06rem;
+  .faq-a {
+    font-size: 16px;
+    line-height: 1.78;
     color: var(--ink-light);
-    margin: 0 0 18px;
   }
 
-  .hero-actions {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-top: 30px;
+  .faq-a strong { color: var(--ink); font-weight: 600; }
+
+  /* ── Transition ── */
+  .transition-block {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border-light);
   }
 
-  .button,
-  .ghost-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    border-radius: 999px;
-    padding: 12px 18px;
-    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-  }
+  .transition-block:first-of-type { padding-top: 0; }
+  .transition-block:last-of-type { border-bottom: none; }
 
-  .button {
-    background: var(--accent-green);
-    color: #f8f6f1;
-    border: 1px solid var(--accent-green);
-    box-shadow: 0 10px 22px rgba(74, 124, 89, 0.18);
-  }
-
-  .ghost-button {
-    background: transparent;
-    color: var(--ink);
-    border: 1px solid var(--border);
-  }
-
-  .button:hover,
-  .ghost-button:hover,
-  .button:focus-visible,
-  .ghost-button:focus-visible {
-    transform: translateY(-1px);
-    outline: none;
-  }
-
-  .ghost-button:hover,
-  .ghost-button:focus-visible {
-    border-color: var(--accent-green-faint);
-    background: rgba(232, 240, 234, 0.45);
-  }
-
-  .hero-panel {
-    padding: 28px;
-    display: grid;
-    gap: 18px;
-  }
-
-  .panel-block {
-    background: rgba(243, 239, 232, 0.65);
-    border: 1px solid var(--border-light);
-    border-radius: 20px;
-    padding: 20px;
-  }
-
-  .panel-label {
+  .transition-label {
     font-family: 'Source Code Pro', monospace;
-    font-size: 11px;
+    font-size: 12px;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    color: var(--accent-orange);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .transition-block p {
+    font-size: 16px;
+    color: var(--ink-light);
+    line-height: 1.78;
+    margin-bottom: 12px;
+  }
+
+  .transition-block p:last-child { margin-bottom: 0; }
+
+  .caveat {
+    margin-top: 32px;
+    background: var(--accent-orange-light);
+    border-radius: 8px;
+    padding: 28px 32px;
+  }
+
+  .caveat-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 1em;
     color: var(--accent-orange);
     margin-bottom: 10px;
   }
 
-  .panel-block p {
-    margin: 0;
-    color: var(--ink-light);
-  }
-
-  .stat-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-  }
-
-  .stat {
-    background: var(--card);
-    border: 1px solid var(--border-light);
-    border-radius: 16px;
-    padding: 16px 14px;
-  }
-
-  .stat strong {
-    display: block;
-    font-family: 'Libre Baskerville', Georgia, serif;
-    font-size: 1.55rem;
-    color: var(--accent-green-deep);
-    margin-bottom: 4px;
-  }
-
-  .stat span {
-    display: block;
-    font-family: 'Source Code Pro', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--ink-faint);
-  }
-
-  .section {
-    margin-top: 56px;
-  }
-
-  .section-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    gap: 20px;
-    margin-bottom: 22px;
-  }
-
-  .section-title {
-    max-width: 42rem;
-  }
-
-  .section-kicker {
-    font-family: 'Source Code Pro', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--accent-green);
-    margin-bottom: 12px;
-  }
-
-  .section-title h2 {
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-    line-height: 1.15;
-    margin-bottom: 10px;
-  }
-
-  .section-title p {
-    margin: 0;
-    color: var(--ink-light);
-  }
-
-  .chip-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 16px;
-  }
-
-  .chip {
-    appearance: none;
-    border: 1px solid var(--border);
-    background: rgba(255, 253, 249, 0.88);
-    border-radius: 999px;
-    padding: 8px 12px;
-    font: inherit;
-    font-size: 14px;
-    color: var(--ink-light);
-    cursor: pointer;
-    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
-  }
-
-  .chip.active,
-  .chip:hover,
-  .chip:focus-visible {
-    border-color: var(--accent-green);
-    color: var(--accent-green);
-    background: var(--accent-green-light);
-    outline: none;
-  }
-
-  .garden-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 290px;
-    gap: 30px;
-    align-items: start;
-  }
-
-  .article-list {
-    display: grid;
-    gap: 18px;
-  }
-
-  .entry {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: 22px;
-    padding: 24px 24px 22px;
-    background: rgba(255, 253, 249, 0.82);
-    border: 1px solid rgba(226, 221, 212, 0.94);
-    border-radius: 24px;
-    box-shadow: var(--shadow-soft);
-    text-decoration: none;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-  }
-
-  .entry:hover,
-  .entry:focus-visible {
-    transform: translateY(-2px);
-    border-color: var(--accent-green-faint);
-    outline: none;
-  }
-
-  .entry-stage {
-    align-self: start;
-    justify-self: start;
-    padding: 10px 12px;
-    border-radius: 16px;
-    background: var(--accent-green-light);
-    color: var(--accent-green-deep);
-    border: 1px solid var(--accent-green-faint);
-  }
-
-  .entry-stage strong {
-    display: block;
-    font-family: 'Libre Baskerville', Georgia, serif;
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
-  .entry-stage span {
-    display: block;
-    margin-top: 2px;
-    font-family: 'Source Code Pro', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  .entry-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 12px;
-    font-family: 'Source Code Pro', monospace;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--ink-faint);
-  }
-
-  .entry-title {
-    font-size: clamp(1.45rem, 2.1vw, 1.85rem);
-    line-height: 1.2;
-    margin-bottom: 12px;
-  }
-
-  .entry-summary {
-    margin: 0 0 16px;
-    color: var(--ink-light);
-    max-width: 46rem;
-  }
-
-  .tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .tag {
-    border-radius: 999px;
-    padding: 5px 9px;
-    background: var(--warm-white);
-    color: var(--ink-light);
-    border: 1px solid var(--border-light);
-    font-size: 13px;
-  }
-
-  .empty-state {
-    display: none;
-    background: var(--accent-orange-light);
-    border: 1px solid rgba(194, 112, 62, 0.14);
-    border-radius: 18px;
-    padding: 18px 20px;
-    color: var(--ink-light);
-  }
-
-  .garden-aside {
-    position: sticky;
-    top: 22px;
-    display: grid;
-    gap: 16px;
-  }
-
-  .aside-card {
-    background: rgba(255, 253, 249, 0.84);
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    padding: 22px;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .aside-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
-
-  .aside-card p {
-    margin: 0;
-    color: var(--ink-light);
-  }
-
-  .aside-list {
-    list-style: none;
-    margin: 14px 0 0;
-    padding: 0;
-    display: grid;
-    gap: 10px;
-  }
-
-  .aside-list li {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-light);
-    color: var(--ink-light);
-  }
-
-  .aside-list li:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-
-  .aside-list span {
-    font-family: 'Source Code Pro', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--ink-faint);
-    white-space: nowrap;
-  }
-
-  .pathways {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-  }
-
-  .path-card {
-    background: rgba(255, 253, 249, 0.8);
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 24px;
-    position: relative;
-    overflow: hidden;
-    min-height: 220px;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .path-card::after {
-    content: "";
-    position: absolute;
-    right: -28px;
-    bottom: -36px;
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    opacity: 0.7;
-  }
-
-  .path-card:nth-child(1)::after {
-    background: radial-gradient(circle, rgba(232, 240, 234, 0.95) 0%, rgba(232, 240, 234, 0) 70%);
-  }
-
-  .path-card:nth-child(2)::after {
-    background: radial-gradient(circle, rgba(245, 235, 227, 0.95) 0%, rgba(245, 235, 227, 0) 70%);
-  }
-
-  .path-card:nth-child(3)::after {
-    background: radial-gradient(circle, rgba(209, 226, 213, 0.95) 0%, rgba(209, 226, 213, 0) 70%);
-  }
-
-  .path-card .panel-label {
-    margin-bottom: 14px;
-  }
-
-  .path-card p {
-    margin: 0;
-    color: var(--ink-light);
-    max-width: 25ch;
-  }
+  .caveat p { font-size: 15px; line-height: 1.75; color: var(--ink-light); }
 
   footer {
-    margin-top: 72px;
-    padding-top: 24px;
+    margin-top: 56px;
+    padding-top: 28px;
     border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    gap: 18px;
-    flex-wrap: wrap;
-    color: var(--ink-faint);
+    text-align: center;
     font-size: 14px;
+    color: var(--ink-faint);
   }
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    animation: fade-up 0.8s ease forwards;
-  }
-
-  .reveal-delay-1 { animation-delay: 0.08s; }
-  .reveal-delay-2 { animation-delay: 0.16s; }
-  .reveal-delay-3 { animation-delay: 0.24s; }
-
-  @keyframes fade-up {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @media (max-width: 980px) {
-    .hero,
-    .garden-layout,
-    .pathways {
+  /* ── Responsive: collapse sidebar on small screens ── */
+  @media (max-width: 820px) {
+    .layout {
       grid-template-columns: 1fr;
+      gap: 0;
+      padding: 48px 20px 60px;
     }
 
-    .garden-aside {
-      position: static;
+    .toc {
+      position: relative;
+      top: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+      margin-bottom: 40px;
     }
+
+    h1 { font-size: 1.8em; }
+    .section-label { font-size: 1.3em; }
+    .premise { padding: 24px 22px 20px; }
+    .craft-item { grid-template-columns: 36px 1fr; gap: 14px; }
+    .craft-letter { font-size: 1.6em; }
   }
 
-  @media (max-width: 720px) {
-    .page-shell {
-      padding: 20px 18px 56px;
-    }
-
-    .topbar {
-      align-items: start;
-      flex-direction: column;
-      padding-bottom: 18px;
-    }
-
-    .hero-copy,
-    .hero-panel {
-      padding: 24px 22px;
-      border-radius: 22px;
-    }
-
-    .section-head,
-    footer {
-      flex-direction: column;
-      align-items: start;
-    }
-
-    .stat-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .entry {
-      grid-template-columns: 1fr;
-      gap: 16px;
-      padding: 20px;
-      border-radius: 20px;
-    }
+  @media print {
+    body { background: #fff; font-size: 15px; }
+    .layout { grid-template-columns: 1fr; padding: 20px 0; }
+    .toc { display: none; }
+    .caveat { background: #f5f0ea; }
   }
 </style>
 </head>
 <body>
-  <div class="page-shell">
-    <header class="topbar reveal">
-      <a class="brand" href="index.html" aria-label="The Grappling Craft home">
-        <span class="brand-mark" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5.2 12.1c2.8-4.6 5.9-6.9 9.1-6.9 1.4 0 2.6.4 3.5 1.2-1.2.1-2.3.6-3.3 1.6-1.1 1.1-1.9 2.6-2.6 4.5-.7 2-1.7 3.4-3 4.4-1.2.9-2.8 1.4-4.7 1.4 0-2.1.3-4.2 1-6.2Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M6.2 16.5c2.7-1.4 4.8-3.9 6.1-7.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-          </svg>
-        </span>
-        <span class="brand-copy">
-          <strong>The Grappling Craft</strong>
-          <span>Digital Garden for Jiu Jitsu Coaching</span>
-        </span>
-      </a>
-      <nav class="topbar-links" aria-label="Primary">
-        <a href="#garden">Garden</a>
-        <a href="#pathways">Pathways</a>
-        <a href="ecological-dynamics-cheat-sheet.html">Featured Article</a>
-      </nav>
+<div class="layout">
+
+  <!-- ── Sidebar TOC ── -->
+  <nav class="toc">
+    <div class="toc-title">Contents</div>
+    <a href="#core-argument" id="toc-core">The Core Argument</a>
+    <a href="#craft" id="toc-craft">CRAFT Framework</a>
+    <a href="#faq" id="toc-faq">Common Concerns</a>
+    <a href="#transition" id="toc-transition">Making the Shift</a>
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <div class="main">
+
+    <header>
+      <div class="breadcrumb">Reference Sheet</div>
+      <h1>Ecological Dynamics for Grappling Coaches</h1>
+      <p class="subtitle">A concise guide to the what, why, and how of ecologically informed training — written for coaches coming from a traditional background.</p>
     </header>
 
-    <section class="hero">
-      <div class="hero-copy reveal reveal-delay-1">
-        <div class="eyebrow">A Living Archive</div>
-        <h1>The Grappling Craft</h1>
-        <p>A digital garden for coaches who care about the craft of teaching grappling: ecological dynamics, constraints-led practice, skill acquisition, training design, and the lived texture of the room.</p>
-        <p>The aim is not to collect techniques. It is to collect better ways of seeing practice, shaping problems, and helping athletes become adaptable under pressure.</p>
-        <div class="hero-actions">
-          <a class="button" href="ecological-dynamics-cheat-sheet.html">Read the Field Guide</a>
-          <a class="ghost-button" href="#garden">Browse the Garden</a>
-        </div>
-      </div>
-
-      <aside class="hero-panel reveal reveal-delay-2" aria-label="Garden overview">
-        <div class="panel-block">
-          <div class="panel-label">What Grows Here</div>
-          <p>Essays for argument, notes for unfinished thinking, and practical field guides for the coaching floor.</p>
-        </div>
-        <div class="stat-grid">
-          <div class="stat">
-            <strong>1</strong>
-            <span>Evergreen guide</span>
-          </div>
-          <div class="stat">
-            <strong>4</strong>
-            <span>Core topics</span>
-          </div>
-          <div class="stat">
-            <strong>CRA</strong>
-            <span>Constraints-first lens</span>
-          </div>
-        </div>
-        <div class="panel-block">
-          <div class="panel-label">Editorial North Star</div>
-          <p>Warm, rigorous, and practical. Built to feel like a notebook shelf rather than a content feed.</p>
-        </div>
-      </aside>
-    </section>
-
-    <section class="section reveal reveal-delay-2" id="garden">
+    <!-- TWO PREMISES -->
+    <div class="section" id="core-argument">
       <div class="section-head">
-        <div class="section-title">
-          <div class="section-kicker">The Garden</div>
-          <h2>Browse by topic, type, and stage of growth</h2>
-          <p>The structure borrows from digital gardening: some pieces are polished and evergreen, some are notes still being tested on the mats.</p>
+        <!-- Icon: puzzle piece connecting — problem + solution coupled -->
+        <div class="section-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="22" stroke="#d1e2d5" stroke-width="1.5" fill="#e8f0ea"/>
+            <path d="M16 20c0-1 .8-2 2-2h2.5c0-1.5 1.2-2.5 2.5-2.5s2.5 1 2.5 2.5H28c1.2 0 2 1 2 2v2.5c1.5 0 2.5 1.2 2.5 2.5s-1 2.5-2.5 2.5V30c0 1.2-1 2-2 2h-2.5c0 1.5-1.2 2.5-2.5 2.5s-2.5-1-2.5-2.5H18c-1.2 0-2-1-2-2v-2.5c-1.5 0-2.5-1.2-2.5-2.5s1-2.5 2.5-2.5V20z" stroke="#4a7c59" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
         </div>
+        <div class="section-label">The Core Argument</div>
+      </div>
+      <div class="section-subtitle">Two premises. If you accept them, the implications for training follow naturally.</div>
+
+      <div class="premise">
+        <div class="number">Premise 1 - Ecological</div>
+        <h3>Don't separate the problem from the solution</h3>
+        <p>Teaching techniques in isolation - without letting the athlete experience the problem that gave rise to that technique - builds practitioners who know moves theoretically but can't recognize the opportunities or timings for when to use them. The technique only makes sense inside the context that created it.</p>
+        <div class="example"><strong>Example —</strong> Showing an X-guard sweep on a cooperating, stationary partner divorces the sweep from its actual purpose: dealing with a dynamic top player putting down weight and trying to get past your legs.</div>
       </div>
 
-      <div class="chip-row" aria-label="Filter by topic">
-        <button class="chip active" data-filter-group="topic" data-filter-value="all" type="button">All topics</button>
-        <button class="chip" data-filter-group="topic" data-filter-value="ecological-dynamics" type="button">Ecological Dynamics</button>
-        <button class="chip" data-filter-group="topic" data-filter-value="coaching" type="button">Coaching</button>
-        <button class="chip" data-filter-group="topic" data-filter-value="skill-acquisition" type="button">Skill Acquisition</button>
-        <button class="chip" data-filter-group="topic" data-filter-value="jiu-jitsu" type="button">Jiu Jitsu</button>
+      <div class="premise">
+        <div class="number">Premise 2 - Dynamics</div>
+        <h3>No two problems, and no two solutions, are alike.</h3>
+        <p>The central challenge of grappling is solving novel movement problems. The athlete, opponent, and task are always different — different body types, different intentions. Your knee cut and my knee cut might share a name but differ in execution, because we are solving slightly different problems with different bodies. Drilling one idealized version of a technique won't help athletes find <em>their own</em> solutions — at best it serves as a temporary guide, at worst it hinders their capacity to problem-solve.</p>
+        <div class="example"><strong>Clarification —</strong> This doesn't mean zero patterns exist. Gravity, anatomy, and the geometry of grappling create invariant features that channel everyone toward similar solution spaces.</div>
       </div>
+    </div>
 
-      <div class="chip-row" aria-label="Filter by type">
-        <button class="chip active" data-filter-group="type" data-filter-value="all" type="button">All types</button>
-        <button class="chip" data-filter-group="type" data-filter-value="field-guide" type="button">Field Guides</button>
-        <button class="chip" data-filter-group="type" data-filter-value="essay" type="button">Essays</button>
-        <button class="chip" data-filter-group="type" data-filter-value="note" type="button">Notes</button>
-      </div>
+    <div class="bridge">
+      <span class="arrow">↓</span>
+      <p>If problems and solutions should stay coupled, and every encounter is novel, then training must be built around solving live, context-rich problems — not memorizing fixed answers.</p>
+    </div>
 
-      <div class="chip-row" aria-label="Filter by growth stage">
-        <button class="chip active" data-filter-group="stage" data-filter-value="all" type="button">All stages</button>
-        <button class="chip" data-filter-group="stage" data-filter-value="evergreen" type="button">Evergreen</button>
-        <button class="chip" data-filter-group="stage" data-filter-value="budding" type="button">Budding</button>
-        <button class="chip" data-filter-group="stage" data-filter-value="seedling" type="button">Seedling</button>
-      </div>
-
-      <div class="garden-layout">
-        <div>
-          <div class="article-list">
-            <a
-              class="entry"
-              href="ecological-dynamics-cheat-sheet.html"
-              data-topic="ecological-dynamics coaching skill-acquisition jiu-jitsu"
-              data-type="field-guide"
-              data-stage="evergreen"
-            >
-              <div class="entry-stage">
-                <strong>Evergreen</strong>
-                <span>Field Guide</span>
-              </div>
-              <div>
-                <div class="entry-meta">
-                  <span>Reference Sheet</span>
-                  <span>Practical Primer</span>
-                  <span>Coach-Facing</span>
-                </div>
-                <h3 class="entry-title">Ecological Dynamics for Jiu Jitsu Coaches</h3>
-                <p class="entry-summary">A concise, durable introduction to the ecological case for coupling problem and solution, then designing training around live task constraints rather than isolated technique rehearsal.</p>
-                <div class="tag-list" aria-label="Entry tags">
-                  <span class="tag">Constraints-Led Approach</span>
-                  <span class="tag">Representative Design</span>
-                  <span class="tag">Functional Variability</span>
-                  <span class="tag">Task Simplification</span>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <div class="empty-state" id="empty-state">
-            No entries match the current filters yet. Reset a filter, or add more pieces to expand the garden.
-          </div>
-        </div>
-
-        <aside class="garden-aside">
-          <div class="aside-card">
-            <div class="panel-label">Beds</div>
-            <h3>Current planting map</h3>
-            <p>These are the recurring beds this garden expects to grow into as more writing gets added.</p>
-            <ul class="aside-list">
-              <li><strong>Field Guides</strong><span>Applied frameworks</span></li>
-              <li><strong>Practice Notes</strong><span>Messy observations</span></li>
-              <li><strong>Essays</strong><span>Long-form arguments</span></li>
-            </ul>
-          </div>
-
-          <div class="aside-card">
-            <div class="panel-label">Topics</div>
-            <h3>Core lines of inquiry</h3>
-            <ul class="aside-list">
-              <li><strong>Ecological dynamics</strong><span>Designing live tasks</span></li>
-              <li><strong>Coaching craft</strong><span>How to shape the room</span></li>
-              <li><strong>Skill acquisition</strong><span>How learning stabilizes</span></li>
-            </ul>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section reveal reveal-delay-3" id="pathways">
+    <!-- CRAFT -->
+    <div class="section" id="craft">
       <div class="section-head">
-        <div class="section-title">
-          <div class="section-kicker">Reading Paths</div>
-          <h2>Three ways into the craft</h2>
-          <p>Readers will arrive with different needs. These paths make the space feel like an environment, not just a file directory.</p>
+        <!-- Icon: sliders / dials — constraint manipulation -->
+        <div class="section-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="22" stroke="#d1e2d5" stroke-width="1.5" fill="#e8f0ea"/>
+            <line x1="17" y1="14" x2="17" y2="34" stroke="#4a7c59" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="24" y1="14" x2="24" y2="34" stroke="#4a7c59" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="31" y1="14" x2="31" y2="34" stroke="#4a7c59" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="17" cy="21" r="3" fill="#4a7c59"/>
+            <circle cx="24" cy="28" r="3" fill="#4a7c59"/>
+            <circle cx="31" cy="19" r="3" fill="#4a7c59"/>
+          </svg>
+        </div>
+        <div class="section-label">The Coaching Framework</div>
+      </div>
+      <div class="section-subtitle">CRAFT — Five principles for session design</div>
+
+      <div class="craft-item">
+        <div class="craft-letter">C</div>
+        <div class="craft-body">
+          <h3>Constraints Manipulation</h3>
+          <p>Your primary coaching tool. Design small-sided, task-oriented games that let athletes explore an important slice of the sport. Constrain offense to afford defense (or vice versa), constrain start and win positions to highlight specific opportunities.</p>
+          <div class="craft-tip">Think: "What problem do I want them to solve?" then build the game around that problem, not around a specific technique.</div>
         </div>
       </div>
 
-      <div class="pathways">
-        <article class="path-card">
-          <div class="panel-label">For Traditional Coaches</div>
-          <h3>Start with the problem-solution split</h3>
-          <p>Read the featured guide first if you are trying to understand why isolated drilling creates brittle skill.</p>
-        </article>
-
-        <article class="path-card">
-          <div class="panel-label">For Session Designers</div>
-          <h3>Use the CRAFT frame to build rounds</h3>
-          <p>Move from abstract theory to practical constraint design, attentional cues, and representative simplification.</p>
-        </article>
-
-        <article class="path-card">
-          <div class="panel-label">For Curious Practitioners</div>
-          <h3>Follow the unfinished edges</h3>
-          <p>Future notes and essays can branch from this first guide into training ecology, perception-action, and gym culture.</p>
-        </article>
+      <div class="craft-item">
+        <div class="craft-letter">R</div>
+        <div class="craft-body">
+          <h3>Representative Learning Design</h3>
+          <p>While simplifying the game, maintain "aliveness." Three tests: Does the task force athletes to read and react to their opponent, not just execute a movement? Does it allow multiple opportunities the athlete selects from, not just one scripted path? Does it produce movements, intensity and intentions that transfer to real sparring?</p>
+          <div class="craft-tip">A game where athletes must face away from their opponent at all times might have intensity, multiple opportunities, and force reaction, but it won't produce relevant grappling movements.</div>
+        </div>
       </div>
-    </section>
 
-    <footer class="reveal reveal-delay-3">
-      <span>The Grappling Craft is designed as a quiet, living index for ideas that need revisiting.</span>
-      <span>Featured entry: <a href="ecological-dynamics-cheat-sheet.html">Ecological Dynamics for Jiu Jitsu Coaches</a></span>
+      <div class="craft-item">
+        <div class="craft-letter">A</div>
+        <div class="craft-body">
+          <h3>Attentional Focus</h3>
+          <p>When giving verbal cues, direct attention to the outcome and environment (external focus), not internal body positioning. "Get their hands on the floor" beats "tilt your hips to the right and place your feet here." You can also guide attention through task and constraint design itself.</p>
+          <div class="craft-tip">Cues are best used to clarify task intention or draw attention to a pattern the athlete keeps missing — e.g., "pay attention to the space between your knee and elbow and how that relates to getting passed."</div>
+        </div>
+      </div>
+
+      <div class="craft-item">
+        <div class="craft-letter">F</div>
+        <div class="craft-body">
+          <h3>Functional Variability</h3>
+          <p>Develop athletes who have many solutions for a given problem and can adapt the same solution outcome across many different problems. Design training that forces athletes to face varied opponents, body types, and scenarios — not repetition of one ideal form.</p>
+          <div class="craft-tip">Rotate partners frequently. Change constraints between rounds. The variability is the training stimulus.</div>
+        </div>
+      </div>
+
+      <div class="craft-item">
+        <div class="craft-letter">T</div>
+        <div class="craft-body">
+          <h3>Task Simplification</h3>
+          <p>For beginners and new problem spaces, reduce complexity by tightening constraints, narrowing intentions, and taking smaller slices of the full context. Crucially, simplify while maintaining representativeness — the task must still be alive, still require reading and reacting.</p>
+          <div class="craft-tip">"Keep your feet on the top player — hooked or posted" gives a beginner a clear intention without prescribing mechanics, and lets common solutions emerge naturally from interaction.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section" id="faq">
+      <div class="section-head">
+        <!-- Icon: speech bubbles — Q&A -->
+        <div class="section-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="22" stroke="#d1e2d5" stroke-width="1.5" fill="#e8f0ea"/>
+            <path d="M14 18c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v7c0 1.1-.9 2-2 2h-3l-3 3v-3h-4c-1.1 0-2-.9-2-2v-7z" stroke="#4a7c59" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M30 22h2c1.1 0 2 .9 2 2v7c0 1.1-.9 2-2 2h-4v3l-3-3h-3" stroke="#4a7c59" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="section-label">Common Concerns</div>
+      </div>
+      <div class="section-subtitle">FAQ for traditionally trained coaches</div>
+
+      <div class="faq-item">
+        <div class="faq-q">"Don't beginners need techniques broken down step by step? The full problem is too overwhelming."</div>
+        <div class="faq-a">Beginners need <strong>simplicity, not decomposition</strong>. Decomposition strips out the problem entirely. Task simplification (tighter constraints, narrower intentions, smaller slices) reduces complexity while keeping the task alive. Many ecologically minded coaches have developed beginners through advanced levels without any isolated drilling — the key is scaling the difficulty of the game.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">"If no two solutions are alike, how can we teach anything? The knee cut exists as a recognizable technique for a reason."</div>
+        <div class="faq-a">The knee cut converges across practitioners not because everyone copied the same instructional, but because <strong>the physics of passing through legs while maintaining pressure channels everyone toward similar structural features</strong>. Gravity, anatomy, and geometry create those invariant patterns. You can organize training around recurring problem structures without prescribing idealized technique templates — the stable patterns will emerge from the constraints.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">"Good traditional coaches already use progressive resistance and positional sparring. How is this different?"</div>
+        <div class="faq-a">The interventions can look similar, but the logic underneath differs. Traditional coaches who use positional sparring think "here is the correct technique - do it slowly to get it right, then let's make it harder to execute." An ecological coach starts with <strong>"here is a common grappling problem, let's design a training environment where athletes can explore and adapt solutions for it."</strong> One approach begins with the answer and adds complexity and resistance; the other begins with the question and promotes exploration and problem solving.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">"My students seem to learn techniques fine with drilling. They hit the moves by end of class."</div>
+        <div class="faq-a">Research on motor learning shows that traditional methods can produce skill gains that look comparable to ecological methods in the short term, but <strong>when retested for retention weeks later, skill gains under traditional drilling largely vanish, while ecological interventions produce strongly stable retention</strong>. "Did they hit the move today?" may be measuring a mirage. The real question is whether they can solve the problem in live sparring months from now.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">"So I should never give verbal instruction?"</div>
+        <div class="faq-a">No — verbal cues are themselves a type of constraint (an informational one). The framework isn't anti-verbal input. It makes a <strong>specific claim about what cues should point at</strong>: outcomes and environmental relationships (external focus), not internal body mechanics (internal focus). "Get their hands to the floor" over "rotate your hips 30 degrees and place your left foot here." Use cues to clarify task intention or highlight patterns athletes are missing.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">"Wouldn't it take much longer to let athletes discover solutions themselves? Isn't my job to provide a shortcut by giving them the answer?"</div>
+        <div class="faq-a">It feels that way, but the shortcut is largely an illusion. Giving someone the answer might mean they can execute the move by end of class — but research consistently shows those gains <strong>collapse when tested for retention weeks later, while skills developed through constrained, exploratory practice remain stable</strong>. So the "slow" method actually gets athletes to durable competence faster, because you aren't repeatedly re-teaching skills that didn't stick. More fundamentally, the solution you hand an athlete is <em>your</em> solution, shaped by your body and your experience. The athlete still has to discover how to make it work for them — and if they've been trained to wait for answers rather than search for them, they lack the perceptual and problem-solving skills to do that adaptation. Your job as a coach isn't to give shortcuts to solutions; it's to <strong>design problems that guide athletes toward discovering their own solutions efficiently</strong> — through constraint manipulation, task selection, and well-timed external cues.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">"World champions drilled thousands of reps. Doesn't that prove traditional methods work?"</div>
+        <div class="faq-a">Consider survivorship bias: elite athletes may have succeeded <strong>despite</strong> the training method, not because of it. Many high-level competitors naturally self-organize effective solutions regardless of how they train — through extensive sparring, competition, and individual problem-solving that happens alongside the drilling. Ecological dynamics asks: what if we designed training to develop that adaptive problem-solving capacity intentionally, rather than leaving it to chance? How many people could have been even better than they are now?</div>
+      </div>
+    </div>
+
+    <!-- TRANSITION -->
+    <div class="section" id="transition">
+      <div class="section-head">
+        <!-- Icon: path/road branching — transition -->
+        <div class="section-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="22" stroke="#d1e2d5" stroke-width="1.5" fill="#e8f0ea"/>
+            <path d="M24 34V24" stroke="#4a7c59" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M24 24c0-4 -7-4 -7-10" stroke="#4a7c59" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <path d="M24 24c0-4 7-4 7-10" stroke="#4a7c59" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <circle cx="17" cy="14" r="2.5" fill="#4a7c59" opacity="0.3"/>
+            <circle cx="31" cy="14" r="2.5" fill="#4a7c59"/>
+            <circle cx="24" cy="34" r="2.5" fill="#4a7c59" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="section-label">Making the Shift</div>
+      </div>
+      <div class="section-subtitle">A practical roadmap for transitioning</div>
+
+      <div class="transition-block">
+        <div class="transition-label">Reshape the Class</div>
+        <p>Assuming a typical 90-minute class (5–10 min warm-up, 40–50 min static drilling, 30–45 min sparring), start by carving ecological games into the <em>beginning</em> of class — before any drilling. Replace the warm-up with 2–4 rounds of 5-minute constrained games where students explore a problem (e.g., "bottom player: keep feet on the top player, hooked or posted; top player: get past the legs").</p>
+        <p>The order matters. Games come first so that exploration happens before solutions are presented — athletes encounter the problem with fresh attention, not after being handed an answer. Static drilling can follow, which also lets students recover between the games and open sparring if conditioning is a concern. Over time, you can expand the game portion and shrink the drilling portion as you gain confidence in the approach.</p>
+      </div>
+
+      <div class="transition-block">
+        <div class="transition-label">Reshape the Week</div>
+        <p>Rather than converting every class at once, designate one or two sessions per week as fully ecological — no static drilling, just constrained games with progressive complexity, varied partners, and external cues. Keep your other classes in their current format. Run this for a few months and compare how students from the ecological sessions perform in live sparring against your usual benchmarks.</p>
+      </div>
+
+      <div class="transition-block">
+        <div class="transition-label">Reshape the Culture</div>
+        <p>Even without changing class structure at all, you can shift your gym's culture toward exploration. Articulate to students that techniques presented in class don't need to be rote memorized — they are starting points of attention, not scripts. Encourage students to ask their partner for more resistance once they feel comfortable with a movement, rather than continuing to drill cooperatively. Normalize the idea that "finding your own version" of a technique is the goal, not replicating the instructor's version exactly. These small cultural shifts can meaningfully change how athletes relate to their own learning, even within a traditional format.</p>
+      </div>
+
+      <div class="caveat">
+        <div class="caveat-title">An honest note on the hybrid approach</div>
+        <p>These transitional steps are genuinely useful for coaches testing the waters — but if ecological dynamics theory is correct, the hybrid is fundamentally a compromise, not a destination. If you accept the two foundational premises (don't separate the problem from the solution; no two problems or solutions are alike), then any time spent statically drilling is still time where athletes are not developing perception, adaptability, or transfer. The hybrid gets you moving in the right direction, but the logical endpoint of the premises is a fully ecological training environment. Transition gradually, but transition honestly.</p>
+      </div>
+    </div>
+
+    <footer>
+      Based on principles from ecological dynamics and non-linear pedagogy, adapted for grappling coaching.
     </footer>
+
   </div>
+</div>
 
-  <script>
-    (function () {
-      const activeFilters = {
-        topic: "all",
-        type: "all",
-        stage: "all"
-      };
+<script>
+  // Scroll-spy for sidebar TOC
+  const sections = document.querySelectorAll('.section[id]');
+  const tocLinks = document.querySelectorAll('.toc a');
 
-      const chips = Array.from(document.querySelectorAll(".chip"));
-      const entries = Array.from(document.querySelectorAll(".entry"));
-      const emptyState = document.getElementById("empty-state");
-
-      function updateVisibility() {
-        let visibleCount = 0;
-
-        entries.forEach((entry) => {
-          const matches = Object.entries(activeFilters).every(([group, value]) => {
-            if (value === "all") {
-              return true;
-            }
-
-            const rawValue = entry.dataset[group] || "";
-            return rawValue.split(" ").includes(value);
-          });
-
-          entry.style.display = matches ? "grid" : "none";
-          if (matches) {
-            visibleCount += 1;
-          }
-        });
-
-        emptyState.style.display = visibleCount === 0 ? "block" : "none";
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(link => link.classList.remove('active'));
+        const active = document.querySelector(`.toc a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
       }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' });
 
-      chips.forEach((chip) => {
-        chip.addEventListener("click", () => {
-          const group = chip.dataset.filterGroup;
-          const value = chip.dataset.filterValue;
-
-          activeFilters[group] = value;
-
-          chips
-            .filter((candidate) => candidate.dataset.filterGroup === group)
-            .forEach((candidate) => candidate.classList.remove("active"));
-
-          chip.classList.add("active");
-          updateVisibility();
-        });
-      });
-
-      updateVisibility();
-    }());
-  </script>
+  sections.forEach(section => observer.observe(section));
+</script>
 </body>
 </html>
