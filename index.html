@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Grappling Craft</title>
+<meta name="description" content="The Grappling Craft is a digital garden of notes, essays, and field guides on jiu jitsu coaching, ecological dynamics, and skill acquisition.">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf8f4;
+    --warm-white: #f3efe8;
+    --ink: #353534;
+    --ink-light: #5c5c5a;
+    --ink-faint: #8a8985;
+    --accent-green: #4a7c59;
+    --accent-green-deep: #335c43;
+    --accent-green-light: #e8f0ea;
+    --accent-green-faint: #d1e2d5;
+    --accent-orange: #c2703e;
+    --accent-orange-light: #f5ebe3;
+    --border: #e2ddd4;
+    --border-light: #eae6df;
+    --card: #fffdf9;
+    --shadow-soft: 0 18px 40px rgba(53, 53, 52, 0.05);
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Source Sans 3', -apple-system, sans-serif;
+    background:
+      radial-gradient(circle at top left, rgba(232, 240, 234, 0.95), transparent 30%),
+      radial-gradient(circle at top right, rgba(245, 235, 227, 0.9), transparent 28%),
+      linear-gradient(180deg, #fbf9f4 0%, #f7f2ea 100%);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    font-size: 17px;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .page-shell {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 28px 80px;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0 24px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .brand-mark {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--accent-green-faint);
+    background: var(--accent-green-light);
+    display: grid;
+    place-items: center;
+    color: var(--accent-green);
+  }
+
+  .brand-copy {
+    min-width: 0;
+  }
+
+  .brand-copy strong {
+    display: block;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 400;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .brand-copy span,
+  .topbar-links a {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+  }
+
+  .topbar-links {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .topbar-links a {
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .topbar-links a:hover,
+  .topbar-links a:focus-visible {
+    color: var(--accent-green);
+    border-color: var(--accent-green-faint);
+    outline: none;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.9fr);
+    gap: 30px;
+    align-items: stretch;
+    margin-bottom: 34px;
+  }
+
+  .hero-copy,
+  .hero-panel {
+    background: rgba(255, 253, 249, 0.72);
+    border: 1px solid rgba(226, 221, 212, 0.9);
+    border-radius: 28px;
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(6px);
+  }
+
+  .hero-copy {
+    padding: 52px 48px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-copy::after {
+    content: "";
+    position: absolute;
+    inset: auto -100px -120px auto;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232, 240, 234, 0.95) 0%, rgba(232, 240, 234, 0) 72%);
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-green);
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--accent-green-faint);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  h1 {
+    font-size: clamp(2.8rem, 5vw, 4.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    max-width: 10ch;
+    margin-bottom: 22px;
+  }
+
+  .hero-copy p {
+    max-width: 40rem;
+    font-size: 1.06rem;
+    color: var(--ink-light);
+    margin: 0 0 18px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+
+  .button,
+  .ghost-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 12px 18px;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .button {
+    background: var(--accent-green);
+    color: #f8f6f1;
+    border: 1px solid var(--accent-green);
+    box-shadow: 0 10px 22px rgba(74, 124, 89, 0.18);
+  }
+
+  .ghost-button {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+
+  .button:hover,
+  .ghost-button:hover,
+  .button:focus-visible,
+  .ghost-button:focus-visible {
+    transform: translateY(-1px);
+    outline: none;
+  }
+
+  .ghost-button:hover,
+  .ghost-button:focus-visible {
+    border-color: var(--accent-green-faint);
+    background: rgba(232, 240, 234, 0.45);
+  }
+
+  .hero-panel {
+    padding: 28px;
+    display: grid;
+    gap: 18px;
+  }
+
+  .panel-block {
+    background: rgba(243, 239, 232, 0.65);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .panel-label {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-orange);
+    margin-bottom: 10px;
+  }
+
+  .panel-block p {
+    margin: 0;
+    color: var(--ink-light);
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    padding: 16px 14px;
+  }
+
+  .stat strong {
+    display: block;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 1.55rem;
+    color: var(--accent-green-deep);
+    margin-bottom: 4px;
+  }
+
+  .stat span {
+    display: block;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+  }
+
+  .section {
+    margin-top: 56px;
+  }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+    margin-bottom: 22px;
+  }
+
+  .section-title {
+    max-width: 42rem;
+  }
+
+  .section-kicker {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-green);
+    margin-bottom: 12px;
+  }
+
+  .section-title h2 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .section-title p {
+    margin: 0;
+    color: var(--ink-light);
+  }
+
+  .chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .chip {
+    appearance: none;
+    border: 1px solid var(--border);
+    background: rgba(255, 253, 249, 0.88);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font: inherit;
+    font-size: 14px;
+    color: var(--ink-light);
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  }
+
+  .chip.active,
+  .chip:hover,
+  .chip:focus-visible {
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+    background: var(--accent-green-light);
+    outline: none;
+  }
+
+  .garden-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 290px;
+    gap: 30px;
+    align-items: start;
+  }
+
+  .article-list {
+    display: grid;
+    gap: 18px;
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 22px;
+    padding: 24px 24px 22px;
+    background: rgba(255, 253, 249, 0.82);
+    border: 1px solid rgba(226, 221, 212, 0.94);
+    border-radius: 24px;
+    box-shadow: var(--shadow-soft);
+    text-decoration: none;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .entry:hover,
+  .entry:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--accent-green-faint);
+    outline: none;
+  }
+
+  .entry-stage {
+    align-self: start;
+    justify-self: start;
+    padding: 10px 12px;
+    border-radius: 16px;
+    background: var(--accent-green-light);
+    color: var(--accent-green-deep);
+    border: 1px solid var(--accent-green-faint);
+  }
+
+  .entry-stage strong {
+    display: block;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .entry-stage span {
+    display: block;
+    margin-top: 2px;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .entry-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+  }
+
+  .entry-title {
+    font-size: clamp(1.45rem, 2.1vw, 1.85rem);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .entry-summary {
+    margin: 0 0 16px;
+    color: var(--ink-light);
+    max-width: 46rem;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    border-radius: 999px;
+    padding: 5px 9px;
+    background: var(--warm-white);
+    color: var(--ink-light);
+    border: 1px solid var(--border-light);
+    font-size: 13px;
+  }
+
+  .empty-state {
+    display: none;
+    background: var(--accent-orange-light);
+    border: 1px solid rgba(194, 112, 62, 0.14);
+    border-radius: 18px;
+    padding: 18px 20px;
+    color: var(--ink-light);
+  }
+
+  .garden-aside {
+    position: sticky;
+    top: 22px;
+    display: grid;
+    gap: 16px;
+  }
+
+  .aside-card {
+    background: rgba(255, 253, 249, 0.84);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 22px;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .aside-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .aside-card p {
+    margin: 0;
+    color: var(--ink-light);
+  }
+
+  .aside-list {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .aside-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--ink-light);
+  }
+
+  .aside-list li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .aside-list span {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  .pathways {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .path-card {
+    background: rgba(255, 253, 249, 0.8);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    min-height: 220px;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .path-card::after {
+    content: "";
+    position: absolute;
+    right: -28px;
+    bottom: -36px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    opacity: 0.7;
+  }
+
+  .path-card:nth-child(1)::after {
+    background: radial-gradient(circle, rgba(232, 240, 234, 0.95) 0%, rgba(232, 240, 234, 0) 70%);
+  }
+
+  .path-card:nth-child(2)::after {
+    background: radial-gradient(circle, rgba(245, 235, 227, 0.95) 0%, rgba(245, 235, 227, 0) 70%);
+  }
+
+  .path-card:nth-child(3)::after {
+    background: radial-gradient(circle, rgba(209, 226, 213, 0.95) 0%, rgba(209, 226, 213, 0) 70%);
+  }
+
+  .path-card .panel-label {
+    margin-bottom: 14px;
+  }
+
+  .path-card p {
+    margin: 0;
+    color: var(--ink-light);
+    max-width: 25ch;
+  }
+
+  footer {
+    margin-top: 72px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    color: var(--ink-faint);
+    font-size: 14px;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fade-up 0.8s ease forwards;
+  }
+
+  .reveal-delay-1 { animation-delay: 0.08s; }
+  .reveal-delay-2 { animation-delay: 0.16s; }
+  .reveal-delay-3 { animation-delay: 0.24s; }
+
+  @keyframes fade-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 980px) {
+    .hero,
+    .garden-layout,
+    .pathways {
+      grid-template-columns: 1fr;
+    }
+
+    .garden-aside {
+      position: static;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .page-shell {
+      padding: 20px 18px 56px;
+    }
+
+    .topbar {
+      align-items: start;
+      flex-direction: column;
+      padding-bottom: 18px;
+    }
+
+    .hero-copy,
+    .hero-panel {
+      padding: 24px 22px;
+      border-radius: 22px;
+    }
+
+    .section-head,
+    footer {
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .stat-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .entry {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 20px;
+      border-radius: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar reveal">
+      <a class="brand" href="index.html" aria-label="The Grappling Craft home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.2 12.1c2.8-4.6 5.9-6.9 9.1-6.9 1.4 0 2.6.4 3.5 1.2-1.2.1-2.3.6-3.3 1.6-1.1 1.1-1.9 2.6-2.6 4.5-.7 2-1.7 3.4-3 4.4-1.2.9-2.8 1.4-4.7 1.4 0-2.1.3-4.2 1-6.2Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6.2 16.5c2.7-1.4 4.8-3.9 6.1-7.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <strong>The Grappling Craft</strong>
+          <span>Digital Garden for Jiu Jitsu Coaching</span>
+        </span>
+      </a>
+      <nav class="topbar-links" aria-label="Primary">
+        <a href="#garden">Garden</a>
+        <a href="#pathways">Pathways</a>
+        <a href="ecological-dynamics-cheat-sheet.html">Featured Article</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy reveal reveal-delay-1">
+        <div class="eyebrow">A Living Archive</div>
+        <h1>The Grappling Craft</h1>
+        <p>A digital garden for coaches who care about the craft of teaching grappling: ecological dynamics, constraints-led practice, skill acquisition, training design, and the lived texture of the room.</p>
+        <p>The aim is not to collect techniques. It is to collect better ways of seeing practice, shaping problems, and helping athletes become adaptable under pressure.</p>
+        <div class="hero-actions">
+          <a class="button" href="ecological-dynamics-cheat-sheet.html">Read the Field Guide</a>
+          <a class="ghost-button" href="#garden">Browse the Garden</a>
+        </div>
+      </div>
+
+      <aside class="hero-panel reveal reveal-delay-2" aria-label="Garden overview">
+        <div class="panel-block">
+          <div class="panel-label">What Grows Here</div>
+          <p>Essays for argument, notes for unfinished thinking, and practical field guides for the coaching floor.</p>
+        </div>
+        <div class="stat-grid">
+          <div class="stat">
+            <strong>1</strong>
+            <span>Evergreen guide</span>
+          </div>
+          <div class="stat">
+            <strong>4</strong>
+            <span>Core topics</span>
+          </div>
+          <div class="stat">
+            <strong>CRA</strong>
+            <span>Constraints-first lens</span>
+          </div>
+        </div>
+        <div class="panel-block">
+          <div class="panel-label">Editorial North Star</div>
+          <p>Warm, rigorous, and practical. Built to feel like a notebook shelf rather than a content feed.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section reveal reveal-delay-2" id="garden">
+      <div class="section-head">
+        <div class="section-title">
+          <div class="section-kicker">The Garden</div>
+          <h2>Browse by topic, type, and stage of growth</h2>
+          <p>The structure borrows from digital gardening: some pieces are polished and evergreen, some are notes still being tested on the mats.</p>
+        </div>
+      </div>
+
+      <div class="chip-row" aria-label="Filter by topic">
+        <button class="chip active" data-filter-group="topic" data-filter-value="all" type="button">All topics</button>
+        <button class="chip" data-filter-group="topic" data-filter-value="ecological-dynamics" type="button">Ecological Dynamics</button>
+        <button class="chip" data-filter-group="topic" data-filter-value="coaching" type="button">Coaching</button>
+        <button class="chip" data-filter-group="topic" data-filter-value="skill-acquisition" type="button">Skill Acquisition</button>
+        <button class="chip" data-filter-group="topic" data-filter-value="jiu-jitsu" type="button">Jiu Jitsu</button>
+      </div>
+
+      <div class="chip-row" aria-label="Filter by type">
+        <button class="chip active" data-filter-group="type" data-filter-value="all" type="button">All types</button>
+        <button class="chip" data-filter-group="type" data-filter-value="field-guide" type="button">Field Guides</button>
+        <button class="chip" data-filter-group="type" data-filter-value="essay" type="button">Essays</button>
+        <button class="chip" data-filter-group="type" data-filter-value="note" type="button">Notes</button>
+      </div>
+
+      <div class="chip-row" aria-label="Filter by growth stage">
+        <button class="chip active" data-filter-group="stage" data-filter-value="all" type="button">All stages</button>
+        <button class="chip" data-filter-group="stage" data-filter-value="evergreen" type="button">Evergreen</button>
+        <button class="chip" data-filter-group="stage" data-filter-value="budding" type="button">Budding</button>
+        <button class="chip" data-filter-group="stage" data-filter-value="seedling" type="button">Seedling</button>
+      </div>
+
+      <div class="garden-layout">
+        <div>
+          <div class="article-list">
+            <a
+              class="entry"
+              href="ecological-dynamics-cheat-sheet.html"
+              data-topic="ecological-dynamics coaching skill-acquisition jiu-jitsu"
+              data-type="field-guide"
+              data-stage="evergreen"
+            >
+              <div class="entry-stage">
+                <strong>Evergreen</strong>
+                <span>Field Guide</span>
+              </div>
+              <div>
+                <div class="entry-meta">
+                  <span>Reference Sheet</span>
+                  <span>Practical Primer</span>
+                  <span>Coach-Facing</span>
+                </div>
+                <h3 class="entry-title">Ecological Dynamics for Jiu Jitsu Coaches</h3>
+                <p class="entry-summary">A concise, durable introduction to the ecological case for coupling problem and solution, then designing training around live task constraints rather than isolated technique rehearsal.</p>
+                <div class="tag-list" aria-label="Entry tags">
+                  <span class="tag">Constraints-Led Approach</span>
+                  <span class="tag">Representative Design</span>
+                  <span class="tag">Functional Variability</span>
+                  <span class="tag">Task Simplification</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="empty-state" id="empty-state">
+            No entries match the current filters yet. Reset a filter, or add more pieces to expand the garden.
+          </div>
+        </div>
+
+        <aside class="garden-aside">
+          <div class="aside-card">
+            <div class="panel-label">Beds</div>
+            <h3>Current planting map</h3>
+            <p>These are the recurring beds this garden expects to grow into as more writing gets added.</p>
+            <ul class="aside-list">
+              <li><strong>Field Guides</strong><span>Applied frameworks</span></li>
+              <li><strong>Practice Notes</strong><span>Messy observations</span></li>
+              <li><strong>Essays</strong><span>Long-form arguments</span></li>
+            </ul>
+          </div>
+
+          <div class="aside-card">
+            <div class="panel-label">Topics</div>
+            <h3>Core lines of inquiry</h3>
+            <ul class="aside-list">
+              <li><strong>Ecological dynamics</strong><span>Designing live tasks</span></li>
+              <li><strong>Coaching craft</strong><span>How to shape the room</span></li>
+              <li><strong>Skill acquisition</strong><span>How learning stabilizes</span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section reveal reveal-delay-3" id="pathways">
+      <div class="section-head">
+        <div class="section-title">
+          <div class="section-kicker">Reading Paths</div>
+          <h2>Three ways into the craft</h2>
+          <p>Readers will arrive with different needs. These paths make the space feel like an environment, not just a file directory.</p>
+        </div>
+      </div>
+
+      <div class="pathways">
+        <article class="path-card">
+          <div class="panel-label">For Traditional Coaches</div>
+          <h3>Start with the problem-solution split</h3>
+          <p>Read the featured guide first if you are trying to understand why isolated drilling creates brittle skill.</p>
+        </article>
+
+        <article class="path-card">
+          <div class="panel-label">For Session Designers</div>
+          <h3>Use the CRAFT frame to build rounds</h3>
+          <p>Move from abstract theory to practical constraint design, attentional cues, and representative simplification.</p>
+        </article>
+
+        <article class="path-card">
+          <div class="panel-label">For Curious Practitioners</div>
+          <h3>Follow the unfinished edges</h3>
+          <p>Future notes and essays can branch from this first guide into training ecology, perception-action, and gym culture.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="reveal reveal-delay-3">
+      <span>The Grappling Craft is designed as a quiet, living index for ideas that need revisiting.</span>
+      <span>Featured entry: <a href="ecological-dynamics-cheat-sheet.html">Ecological Dynamics for Jiu Jitsu Coaches</a></span>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const activeFilters = {
+        topic: "all",
+        type: "all",
+        stage: "all"
+      };
+
+      const chips = Array.from(document.querySelectorAll(".chip"));
+      const entries = Array.from(document.querySelectorAll(".entry"));
+      const emptyState = document.getElementById("empty-state");
+
+      function updateVisibility() {
+        let visibleCount = 0;
+
+        entries.forEach((entry) => {
+          const matches = Object.entries(activeFilters).every(([group, value]) => {
+            if (value === "all") {
+              return true;
+            }
+
+            const rawValue = entry.dataset[group] || "";
+            return rawValue.split(" ").includes(value);
+          });
+
+          entry.style.display = matches ? "grid" : "none";
+          if (matches) {
+            visibleCount += 1;
+          }
+        });
+
+        emptyState.style.display = visibleCount === 0 ? "block" : "none";
+      }
+
+      chips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          const group = chip.dataset.filterGroup;
+          const value = chip.dataset.filterValue;
+
+          activeFilters[group] = value;
+
+          chips
+            .filter((candidate) => candidate.dataset.filterGroup === group)
+            .forEach((candidate) => candidate.classList.remove("active"));
+
+          chip.classList.add("active");
+          updateVisibility();
+        });
+      });
+
+      updateVisibility();
+    }());
+  </script>
+</body>
+</html>
